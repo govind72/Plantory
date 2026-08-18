@@ -2141,6 +2141,10 @@ export type Database = {
       is_member_of_outlet: { Args: { target_outlet: string }; Returns: boolean }
       is_org_admin: { Args: never; Returns: boolean }
       is_owner: { Args: never; Returns: boolean }
+      set_my_language: {
+        Args: { p_lang: Database["public"]["Enums"]["app_language"] }
+        Returns: undefined
+      }
     }
     Enums: {
       app_language: "en" | "hi"

@@ -2,12 +2,13 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 /**
- * Refreshes the Supabase session on every request and gates access:
+ * Next.js "proxy" (formerly middleware). Refreshes the Supabase session on
+ * every request and gates access:
  *  - unauthenticated users are redirected to /login (except public routes)
  *  - authenticated users are bounced away from /login
  * Public routes: the QR plant page (/p/*) and the invoice page (/invoice/*).
  */
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   let response = NextResponse.next({ request });
 
   const supabase = createServerClient(

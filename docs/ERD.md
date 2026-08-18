@@ -18,52 +18,52 @@ erDiagram
   profiles ||--o{ user_outlets : "assigned"
   outlets ||--o{ user_outlets : "staffed by"
 
-  organizations ||--o{ plant_categories : ""
-  organizations ||--o{ plants : ""
+  organizations ||--o{ plant_categories : relates
+  organizations ||--o{ plants : relates
   plant_categories |o--o{ plants : "groups"
   plants ||--o{ plant_sizes : "height+bag variants"
   plants ||--o{ plant_images : "photos"
 
-  organizations ||--o{ suppliers : ""
-  organizations ||--o{ customers : ""
+  organizations ||--o{ suppliers : relates
+  organizations ||--o{ customers : relates
 
   outlets ||--o{ purchases : "receives"
   suppliers |o--o{ purchases : "from"
-  purchases ||--o{ purchase_items : ""
-  purchases ||--o{ purchase_expenses : ""
-  plants ||--o{ purchase_items : ""
-  plant_sizes ||--o{ purchase_items : ""
+  purchases ||--o{ purchase_items : relates
+  purchases ||--o{ purchase_expenses : relates
+  plants ||--o{ purchase_items : relates
+  plant_sizes ||--o{ purchase_items : relates
 
   purchase_items |o--o{ inventory_batches : "creates"
   outlets ||--o{ inventory_batches : "stocks"
-  plants ||--o{ inventory_batches : ""
-  plant_sizes ||--o{ inventory_batches : ""
+  plants ||--o{ inventory_batches : relates
+  plant_sizes ||--o{ inventory_batches : relates
   inventory_batches |o--o{ stock_movements : "affects"
-  outlets ||--o{ stock_movements : ""
+  outlets ||--o{ stock_movements : relates
   outlets ||--o{ stock_transfers : "from/to"
-  stock_transfers ||--o{ stock_transfer_items : ""
-  outlets ||--o{ plant_losses : ""
-  plants ||--o{ plant_losses : ""
+  stock_transfers ||--o{ stock_transfer_items : relates
+  outlets ||--o{ plant_losses : relates
+  plants ||--o{ plant_losses : relates
 
-  plants ||--o{ plant_prices : ""
-  plant_sizes ||--o{ plant_prices : ""
+  plants ||--o{ plant_prices : relates
+  plant_sizes ||--o{ plant_prices : relates
 
-  outlets ||--o{ sales : ""
+  outlets ||--o{ sales : relates
   customers |o--o{ sales : "buys"
-  sales ||--o{ sale_items : ""
-  plants ||--o{ sale_items : ""
-  plant_sizes ||--o{ sale_items : ""
+  sales ||--o{ sale_items : relates
+  plants ||--o{ sale_items : relates
+  plant_sizes ||--o{ sale_items : relates
   sales |o--o{ payments : "customer_in"
   suppliers |o--o{ payments : "supplier_out"
   purchases |o--o{ payments : "supplier_out"
-  sales ||--o{ returns : ""
-  returns ||--o{ return_items : ""
+  sales ||--o{ returns : relates
+  returns ||--o{ return_items : relates
   sale_items ||--o{ return_items : "refers"
 
-  outlets ||--o{ expenses : ""
+  outlets ||--o{ expenses : relates
   outlets ||--o{ day_closes : "cash close"
-  sales |o--o{ whatsapp_messages : ""
-  customers |o--o{ whatsapp_messages : ""
+  sales |o--o{ whatsapp_messages : relates
+  customers |o--o{ whatsapp_messages : relates
 
   organizations {
     uuid id PK

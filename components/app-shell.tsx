@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { logout } from "@/lib/auth/actions";
+import { LanguageSwitcher } from "@/components/language-switcher";
 import { Button } from "@/components/ui/button";
 import type { SessionContext } from "@/lib/auth/session";
 
@@ -31,6 +32,7 @@ export function AppShell({
               {t(`roles.${session.role}`)}
             </p>
           </div>
+          <LanguageSwitcher />
           <form action={logout}>
             <Button variant="outline" size="sm" type="submit">
               {t("auth.signOut")}
