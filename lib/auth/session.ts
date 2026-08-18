@@ -60,3 +60,38 @@ export async function requireAdmin(): Promise<SessionContext> {
   }
   return session;
 }
+
+/** Requires Owner/Admin/Outlet-Manager (redirects Staff). */
+export async function requireManager(): Promise<SessionContext> {
+  const session = await requireSession();
+  if (
+    session.role !== "owner" &&
+    session.role !== "admin" &&
+    session.role !== "outlet_manager"
+  ) {
+    redirect("/dashboard");
+  }
+  return session;
+}
+
+/** Outlets the caller may act in: all org outlets for Owner/Admin, else assigned. */
+export async function accessibleOutlets(
+  session: SessionContext,
+): Promise<{ id: string; name: string }[]> {
+  const supabase = await createClient();
+  if (session.role === "owner" || session.role === "admin") {
+    const { data } = await supabase
+      .from("outlets")
+      .select("id, name")
+      .eq("active", true)
+      .order("name");
+    return data ?? [];
+  }
+  const { data } = await supabase
+    .from("user_outlets")
+    .select("outlet:outlets(id, name)")
+    .eq("user_id", session.userId);
+  return (data ?? [])
+    .map((r) => r.outlet)
+    .filter((o): o is { id: string; name: string } => Boolean(o));
+}

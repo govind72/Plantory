@@ -23,6 +23,7 @@ export function AppShell({
 }) {
   const t = useTranslations();
   const isAdmin = session.role === "owner" || session.role === "admin";
+  const isManager = isAdmin || session.role === "outlet_manager";
 
   const controls = (
     <div className="flex items-center gap-1">
@@ -52,7 +53,7 @@ export function AppShell({
           <p className="text-xs text-muted-foreground">{t("app.name")}</p>
         </div>
         <div className="flex-1 overflow-y-auto p-3">
-          <MainNav isAdmin={isAdmin} variant="sidebar" />
+          <MainNav isAdmin={isAdmin} isManager={isManager} variant="sidebar" />
         </div>
         <div className="space-y-3 border-t p-3">
           <div className="px-1">
@@ -83,7 +84,7 @@ export function AppShell({
 
         {/* Bottom nav — mobile */}
         <nav className="fixed inset-x-0 bottom-0 z-40 flex border-t bg-background/95 backdrop-blur md:hidden">
-          <MainNav isAdmin={isAdmin} variant="bottom" />
+          <MainNav isAdmin={isAdmin} isManager={isManager} variant="bottom" />
         </nav>
       </div>
     </div>

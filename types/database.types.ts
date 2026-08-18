@@ -2127,6 +2127,7 @@ export type Database = {
         Args: never
         Returns: Database["public"]["Enums"]["user_role"]
       }
+      finalize_purchase: { Args: { p_purchase_id: string }; Returns: undefined }
       get_outlet_stock: {
         Args: { p_outlet: string }
         Returns: {

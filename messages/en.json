@@ -31,6 +31,8 @@
   "nav": {
     "dashboard": "Dashboard",
     "plants": "Plants",
+    "purchases": "Purchases",
+    "suppliers": "Suppliers",
     "settings": "Settings",
     "users": "Team"
   },
@@ -210,5 +212,90 @@
     "enquiryMessage": "Hi, I'd like to know more about {plant} at {nursery}.",
     "notFound": "This plant page could not be found.",
     "poweredBy": "Powered by Plantory"
+  },
+  "suppliers": {
+    "title": "Suppliers",
+    "subtitle": "Who you buy plants from.",
+    "new": "New supplier",
+    "edit": "Edit supplier",
+    "empty": "No suppliers yet.",
+    "back": "Back to suppliers",
+    "save": "Save changes",
+    "saving": "Saving…",
+    "create": "Create supplier",
+    "creating": "Creating…",
+    "error": "Could not save supplier.",
+    "remove": "Remove",
+    "fields": {
+      "name": "Name",
+      "contact": "Contact person",
+      "phone": "Phone",
+      "gstin": "GSTIN",
+      "address": "Address",
+      "notes": "Notes"
+    }
+  },
+  "purchases": {
+    "title": "Purchases",
+    "subtitle": "Truck arrivals and stock intake.",
+    "new": "New purchase",
+    "empty": "No purchases yet.",
+    "back": "Back to purchases",
+    "status": {
+      "draft": "Draft",
+      "finalized": "Finalized",
+      "voided": "Voided"
+    },
+    "header": {
+      "title": "Purchase details",
+      "outlet": "Receiving outlet",
+      "supplier": "Supplier",
+      "noSupplier": "— No supplier —",
+      "invoiceNo": "Supplier invoice no.",
+      "date": "Purchase date",
+      "truck": "Truck number",
+      "source": "Source / location",
+      "notes": "Notes",
+      "create": "Create purchase",
+      "creating": "Creating…",
+      "error": "Could not create purchase."
+    },
+    "items": {
+      "title": "Items",
+      "empty": "No items yet.",
+      "plant": "Plant",
+      "size": "Size",
+      "selectPlant": "Select plant",
+      "selectSize": "Select size",
+      "qty": "Qty",
+      "unitCost": "Unit cost (₹)",
+      "amount": "Amount",
+      "landedUnit": "Landed / unit",
+      "add": "Add item",
+      "remove": "Remove"
+    },
+    "expenses": {
+      "title": "Purchase expenses",
+      "subtitle": "Truck, loading, commission… folded into landed cost.",
+      "empty": "No expenses yet.",
+      "label": "Label",
+      "amount": "Amount (₹)",
+      "add": "Add expense",
+      "remove": "Remove"
+    },
+    "summary": {
+      "title": "Summary",
+      "itemsSubtotal": "Items subtotal",
+      "expensesTotal": "Expenses",
+      "landedTotal": "Total landed cost"
+    },
+    "finalize": {
+      "button": "Finalize purchase",
+      "hint": "Creates stock batches and landed costs. This cannot be undone.",
+      "finalizing": "Finalizing…",
+      "error": "Could not finalize purchase."
+    },
+    "finalizedNote": "Finalized — landed costs and stock batches were created.",
+    "preview": "Landed cost preview (updates on finalize)"
   }
 }

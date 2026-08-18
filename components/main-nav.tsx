@@ -6,6 +6,8 @@ import { useTranslations } from "next-intl";
 import {
   LayoutDashboard,
   Leaf,
+  Truck,
+  Building2,
   Settings,
   Users,
   type LucideIcon,
@@ -16,9 +18,11 @@ type NavItem = { href: string; label: string; icon: LucideIcon };
 
 export function MainNav({
   isAdmin,
+  isManager,
   variant,
 }: {
   isAdmin: boolean;
+  isManager: boolean;
   variant: "sidebar" | "bottom";
 }) {
   const pathname = usePathname();
@@ -27,6 +31,12 @@ export function MainNav({
   const items: NavItem[] = [
     { href: "/dashboard", label: t("dashboard"), icon: LayoutDashboard },
     { href: "/plants", label: t("plants"), icon: Leaf },
+    ...(isManager
+      ? [
+          { href: "/purchases", label: t("purchases"), icon: Truck },
+          { href: "/suppliers", label: t("suppliers"), icon: Building2 },
+        ]
+      : []),
     ...(isAdmin
       ? [
           { href: "/settings", label: t("settings"), icon: Settings },
