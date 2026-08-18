@@ -37,12 +37,15 @@ export async function proxy(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   const path = request.nextUrl.pathname;
-  const isAuthRoute =
-    path === "/login" ||
-    path.startsWith("/forgot-password") ||
-    path.startsWith("/reset-password");
+  // Entry auth pages: authenticated users get bounced to the app.
+  const isAuthEntry = path === "/login" || path === "/forgot-password";
+  // Recovery flow needs a (recovery) session, so it must NOT bounce.
+  const isRecovery = path === "/reset-password" || path.startsWith("/auth/");
   const isPublicRoute =
-    isAuthRoute || path.startsWith("/p/") || path.startsWith("/invoice/");
+    isAuthEntry ||
+    isRecovery ||
+    path.startsWith("/p/") ||
+    path.startsWith("/invoice/");
 
   if (!user && !isPublicRoute) {
     const url = request.nextUrl.clone();
@@ -50,7 +53,7 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  if (user && isAuthRoute) {
+  if (user && isAuthEntry) {
     const url = request.nextUrl.clone();
     url.pathname = "/dashboard";
     return NextResponse.redirect(url);

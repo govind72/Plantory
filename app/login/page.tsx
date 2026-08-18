@@ -2,6 +2,7 @@
 
 import { useActionState } from "react";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 import { login, type LoginState } from "@/lib/auth/actions";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { Button } from "@/components/ui/button";
@@ -68,6 +69,12 @@ export default function LoginPage() {
             <Button type="submit" className="w-full" disabled={isPending}>
               {isPending ? t("signingIn") : t("signIn")}
             </Button>
+            <Link
+              href="/forgot-password"
+              className="block text-center text-sm text-muted-foreground underline"
+            >
+              {t("forgotPassword")}
+            </Link>
           </form>
         </CardContent>
       </Card>

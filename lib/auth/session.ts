@@ -51,3 +51,12 @@ export async function requireSession(): Promise<SessionContext> {
     preferredLanguage: profile.preferred_language,
   };
 }
+
+/** Like requireSession, but also requires Owner/Admin (redirects Staff/Managers). */
+export async function requireAdmin(): Promise<SessionContext> {
+  const session = await requireSession();
+  if (session.role !== "owner" && session.role !== "admin") {
+    redirect("/dashboard");
+  }
+  return session;
+}

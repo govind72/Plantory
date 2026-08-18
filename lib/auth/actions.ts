@@ -39,8 +39,16 @@ export async function login(
     return { error: "inactiveAccount" };
   }
 
-  if (isLocale(profile.preferred_language)) {
-    const store = await cookies();
+  // Language reconciliation: the language the user actively selected on the
+  // login screen (cookie) wins and is persisted to their profile. Only when no
+  // choice was made do we seed the cookie from their saved profile preference.
+  const store = await cookies();
+  const chosen = store.get(LOCALE_COOKIE)?.value;
+  if (isLocale(chosen)) {
+    if (chosen !== profile.preferred_language) {
+      await supabase.rpc("set_my_language", { p_lang: chosen });
+    }
+  } else if (isLocale(profile.preferred_language)) {
     store.set(LOCALE_COOKIE, profile.preferred_language, {
       path: "/",
       maxAge: 60 * 60 * 24 * 365,
@@ -54,4 +62,48 @@ export async function logout(): Promise<void> {
   const supabase = await createClient();
   await supabase.auth.signOut();
   redirect("/login");
+}
+
+export type ForgotState = { sent: boolean };
+
+/**
+ * Sends a password-reset email. Always reports "sent" so we never reveal which
+ * emails have accounts. The link lands on /auth/callback which exchanges the
+ * code for a recovery session, then forwards to /reset-password.
+ */
+export async function requestPasswordReset(
+  _prev: ForgotState,
+  formData: FormData,
+): Promise<ForgotState> {
+  const email = String(formData.get("email") ?? "").trim();
+  if (email) {
+    const supabase = await createClient();
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+    await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${appUrl}/auth/callback?next=/reset-password`,
+    });
+  }
+  return { sent: true };
+}
+
+export type ResetState = { status: "idle" | "error" | "tooShort" | "noSession" };
+
+/** Sets a new password using the recovery session, then signs into the app. */
+export async function updatePassword(
+  _prev: ResetState,
+  formData: FormData,
+): Promise<ResetState> {
+  const password = String(formData.get("password") ?? "");
+  if (password.length < 8) return { status: "tooShort" };
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return { status: "noSession" };
+
+  const { error } = await supabase.auth.updateUser({ password });
+  if (error) return { status: "error" };
+
+  redirect("/dashboard");
 }
