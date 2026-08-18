@@ -14,6 +14,7 @@ import {
 } from "../../actions";
 import { PlantForm } from "@/components/plant-form";
 import { AddSizeForm } from "@/components/add-size-form";
+import { PricingEditor, type SizePrice } from "@/components/pricing-editor";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
@@ -43,34 +44,80 @@ export default async function EditPlantPage({
   const t = await getTranslations("plants");
   const ts = await getTranslations("plants.sizes");
   const ti = await getTranslations("plants.images");
+  const tPricing = await getTranslations("pricing");
   const locale = await getLocale();
 
-  const [{ data: plant }, { data: categories }, { data: sizes }, { data: images }] =
-    await Promise.all([
-      supabase
-        .from("plants")
-        .select("*")
-        .eq("id", id)
-        .single(),
-      supabase
-        .from("plant_categories")
-        .select("id, name_en, name_hi")
-        .eq("active", true)
-        .order(locale === "hi" ? "name_hi" : "name_en"),
-      supabase
-        .from("plant_sizes")
-        .select("id, label, height_ft, bag_size")
-        .eq("plant_id", id)
-        .order("sort_order")
-        .order("label"),
-      supabase
-        .from("plant_images")
-        .select("id, storage_path, is_primary")
-        .eq("plant_id", id)
-        .order("is_primary", { ascending: false }),
-    ]);
+  const [
+    { data: plant },
+    { data: categories },
+    { data: sizes },
+    { data: images },
+    { data: settings },
+    { data: prices },
+    { data: batches },
+  ] = await Promise.all([
+    supabase.from("plants").select("*").eq("id", id).single(),
+    supabase
+      .from("plant_categories")
+      .select("id, name_en, name_hi")
+      .eq("active", true)
+      .order(locale === "hi" ? "name_hi" : "name_en"),
+    supabase
+      .from("plant_sizes")
+      .select("id, label, height_ft, bag_size")
+      .eq("plant_id", id)
+      .order("sort_order")
+      .order("label"),
+    supabase
+      .from("plant_images")
+      .select("id, storage_path, is_primary")
+      .eq("plant_id", id)
+      .order("is_primary", { ascending: false }),
+    supabase
+      .from("org_settings")
+      .select("min_margin_pct, target_margin_pct, price_rounding_step")
+      .single(),
+    supabase
+      .from("plant_prices")
+      .select("size_id, min_price, recommended_price, retail_price")
+      .eq("plant_id", id),
+    supabase
+      .from("inventory_batches")
+      .select("size_id, qty_received, landed_unit_cost")
+      .eq("plant_id", id),
+  ]);
 
   if (!plant) notFound();
+
+  // Reference landed cost per size = weighted average of received batches.
+  const landedBySize = new Map<string, { qty: number; total: number }>();
+  for (const b of batches ?? []) {
+    const cur = landedBySize.get(b.size_id) ?? { qty: 0, total: 0 };
+    cur.qty += b.qty_received;
+    cur.total += b.qty_received * Number(b.landed_unit_cost);
+    landedBySize.set(b.size_id, cur);
+  }
+  const pricesBySize = new Map(
+    (prices ?? []).map((p) => [p.size_id, p]),
+  );
+  const rules = {
+    minMarginPct: Number(settings?.min_margin_pct ?? 15),
+    targetMarginPct: Number(settings?.target_margin_pct ?? 25),
+    roundingStep: Number(settings?.price_rounding_step ?? 10),
+  };
+  const sizePrices: SizePrice[] = (sizes ?? []).map((s) => {
+    const l = landedBySize.get(s.id);
+    const p = pricesBySize.get(s.id);
+    return {
+      sizeId: s.id,
+      label: s.label,
+      landedCost: l && l.qty > 0 ? Math.round((l.total / l.qty) * 100) / 100 : null,
+      minPrice: p?.min_price != null ? Number(p.min_price) : null,
+      recommendedPrice:
+        p?.recommended_price != null ? Number(p.recommended_price) : null,
+      retailPrice: p?.retail_price != null ? Number(p.retail_price) : null,
+    };
+  });
 
   const displayName =
     locale === "hi" && plant.common_name_hi
@@ -190,6 +237,17 @@ export default async function EditPlantPage({
             )}
           </div>
           <AddSizeForm plantId={id} />
+        </CardContent>
+      </Card>
+
+      {/* Pricing */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-base">{tPricing("title")}</CardTitle>
+          <p className="text-sm text-muted-foreground">{tPricing("subtitle")}</p>
+        </CardHeader>
+        <CardContent>
+          <PricingEditor plantId={id} rules={rules} sizes={sizePrices} />
         </CardContent>
       </Card>
 

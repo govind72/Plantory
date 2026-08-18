@@ -378,5 +378,36 @@
     "transport_damage": "Transport damage",
     "unknown": "Unknown",
     "other": "Other"
+  },
+  "outlets": {
+    "title": "Outlets",
+    "subtitle": "Your nursery locations.",
+    "new": "New outlet",
+    "edit": "Edit outlet",
+    "empty": "No outlets yet.",
+    "back": "Back to settings",
+    "backList": "Back to outlets",
+    "save": "Save changes",
+    "saving": "Saving…",
+    "create": "Create outlet",
+    "creating": "Creating…",
+    "error": "Could not save outlet.",
+    "active": "Active",
+    "inactive": "Inactive",
+    "activate": "Activate",
+    "deactivate": "Deactivate",
+    "manage": "Manage outlets",
+    "fields": { "name": "Name", "address": "Address", "phone": "Phone" }
+  },
+  "pricing": {
+    "title": "Pricing",
+    "subtitle": "Set selling prices per size (Owner/Admin only).",
+    "landed": "Landed",
+    "min": "Min price",
+    "recommended": "Recommended",
+    "retail": "Retail",
+    "suggest": "Suggest",
+    "save": "Save",
+    "noSizes": "Add sizes first to set prices."
   }
 }

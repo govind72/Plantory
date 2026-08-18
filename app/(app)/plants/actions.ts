@@ -10,6 +10,7 @@ import {
   sizeSchema,
   NONE_VALUE,
 } from "@/lib/validation/plants";
+import { priceSchema } from "@/lib/validation/pricing";
 
 const norm = (x: FormDataEntryValue | null): string => {
   const s = String(x ?? "").trim();
@@ -263,4 +264,56 @@ export async function setPrimaryImage(formData: FormData): Promise<void> {
     .eq("plant_id", plantId);
   await supabase.from("plant_images").update({ is_primary: true }).eq("id", id);
   revalidatePath(`/plants/${plantId}/edit`);
+}
+
+// ---- pricing ---------------------------------------------------------------
+export async function upsertPlantPrice(formData: FormData): Promise<void> {
+  const session = await requireAdmin();
+  const parsed = priceSchema.safeParse({
+    plant_id: formData.get("plant_id"),
+    size_id: formData.get("size_id"),
+    min_price: formData.get("min_price") ?? "",
+    recommended_price: formData.get("recommended_price") ?? "",
+    retail_price: formData.get("retail_price") ?? "",
+  });
+  if (!parsed.success) return;
+  const v = parsed.data;
+  const toNum = (x: number | "") => (x === "" ? null : x);
+
+  const supabase = await createClient();
+  const { data: row, error } = await supabase
+    .from("plant_prices")
+    .upsert(
+      {
+        organization_id: session.organizationId,
+        plant_id: v.plant_id,
+        size_id: v.size_id,
+        min_price: toNum(v.min_price),
+        recommended_price: toNum(v.recommended_price),
+        retail_price: toNum(v.retail_price),
+        updated_by: session.userId,
+      },
+      { onConflict: "plant_id,size_id" },
+    )
+    .select("id")
+    .single();
+  if (error) return;
+
+  // Price changes are audit-logged (CLAUDE.md §3).
+  await supabase.from("audit_logs").insert({
+    organization_id: session.organizationId,
+    actor_id: session.userId,
+    action: "plant_price_change",
+    entity: "plant_prices",
+    entity_id: row?.id ?? null,
+    new_value: {
+      plant_id: v.plant_id,
+      size_id: v.size_id,
+      min_price: toNum(v.min_price),
+      recommended_price: toNum(v.recommended_price),
+      retail_price: toNum(v.retail_price),
+    },
+  });
+
+  revalidatePath(`/plants/${v.plant_id}/edit`);
 }
