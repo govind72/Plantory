@@ -30,6 +30,7 @@
   },
   "nav": {
     "dashboard": "डैशबोर्ड",
+    "plants": "पौधे",
     "settings": "सेटिंग्स",
     "users": "टीम"
   },
@@ -105,6 +106,109 @@
   "common": {
     "language": "भाषा",
     "en": "English",
-    "hi": "हिन्दी"
+    "hi": "हिन्दी",
+    "cancel": "रद्द करें",
+    "delete": "हटाएं"
+  },
+  "plants": {
+    "title": "पौधे",
+    "subtitle": "आपका पौधा कैटलॉग।",
+    "new": "नया पौधा",
+    "categories": "श्रेणियाँ",
+    "empty": "अभी तक कोई पौधा नहीं। अपना पहला पौधा जोड़ें।",
+    "uncategorized": "अवर्गीकृत",
+    "active": "सक्रिय",
+    "inactive": "निष्क्रिय",
+    "makeActive": "सक्रिय करें",
+    "makeInactive": "निष्क्रिय करें",
+    "viewPublic": "सार्वजनिक पेज",
+    "printLabel": "QR लेबल",
+    "back": "पौधों पर वापस",
+    "save": "बदलाव सहेजें",
+    "saving": "सहेजा जा रहा है…",
+    "saved": "सहेजा गया।",
+    "error": "कुछ गड़बड़ हो गई।",
+    "createTitle": "नया पौधा",
+    "editTitle": "पौधा संपादित करें",
+    "create": "पौधा बनाएं",
+    "creating": "बनाया जा रहा है…",
+    "details": "विवरण",
+    "fields": {
+      "commonNameEn": "सामान्य नाम (अंग्रेज़ी)",
+      "commonNameHi": "सामान्य नाम (हिंदी)",
+      "scientificName": "वैज्ञानिक नाम",
+      "localName": "स्थानीय नाम",
+      "category": "श्रेणी",
+      "variety": "किस्म",
+      "unit": "इकाई",
+      "descriptionEn": "विवरण (अंग्रेज़ी)",
+      "descriptionHi": "विवरण (हिंदी)",
+      "careEn": "देखभाल (अंग्रेज़ी)",
+      "careHi": "देखभाल (हिंदी)",
+      "sunlight": "धूप",
+      "water": "पानी",
+      "placement": "स्थान",
+      "none": "—"
+    },
+    "sizes": {
+      "title": "आकार",
+      "subtitle": "प्रत्येक आकार एक ऊँचाई (फीट में) और/या बैग आकार है।",
+      "height": "ऊँचाई (फीट)",
+      "bag": "बैग आकार",
+      "label": "लेबल",
+      "add": "आकार जोड़ें",
+      "adding": "जोड़ा जा रहा है…",
+      "empty": "अभी तक कोई आकार नहीं।",
+      "remove": "हटाएं"
+    },
+    "images": {
+      "title": "तस्वीरें",
+      "add": "फोटो अपलोड करें",
+      "uploading": "अपलोड हो रहा है…",
+      "empty": "अभी तक कोई तस्वीर नहीं।",
+      "primary": "मुख्य",
+      "makePrimary": "मुख्य बनाएं",
+      "remove": "हटाएं",
+      "hint": "JPG या PNG, 5 MB तक।"
+    },
+    "cats": {
+      "title": "श्रेणियाँ",
+      "subtitle": "पौधों को प्रकार के अनुसार समूहित करें (जैसे पाम, इनडोर)।",
+      "nameEn": "नाम (अंग्रेज़ी)",
+      "nameHi": "नाम (हिंदी)",
+      "empty": "अभी तक कोई श्रेणी नहीं।",
+      "remove": "हटाएं",
+      "create": "श्रेणी जोड़ें",
+      "creating": "जोड़ा जा रहा है…"
+    },
+    "qr": {
+      "title": "QR लेबल",
+      "scanHint": "देखभाल और पौधे की जानकारी के लिए स्कैन करें",
+      "print": "लेबल प्रिंट करें"
+    }
+  },
+  "plantAttrs": {
+    "sunlight": {
+      "full_sun": "पूर्ण धूप",
+      "partial_shade": "आंशिक छाया",
+      "full_shade": "पूर्ण छाया"
+    },
+    "water": { "low": "कम", "medium": "मध्यम", "high": "अधिक" },
+    "placement": {
+      "indoor": "इनडोर",
+      "outdoor": "आउटडोर",
+      "both": "इनडोर / आउटडोर"
+    }
+  },
+  "publicPlant": {
+    "care": "देखभाल",
+    "sunlight": "धूप",
+    "water": "पानी",
+    "placement": "स्थान",
+    "sizes": "उपलब्ध आकार",
+    "enquire": "व्हाट्सएप पर पूछें",
+    "enquiryMessage": "नमस्ते, मैं {nursery} में {plant} के बारे में और जानना चाहता/चाहती हूँ।",
+    "notFound": "यह पौधा पेज नहीं मिला।",
+    "poweredBy": "Plantory द्वारा संचालित"
   }
 }

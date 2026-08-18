@@ -30,6 +30,7 @@
   },
   "nav": {
     "dashboard": "Dashboard",
+    "plants": "Plants",
     "settings": "Settings",
     "users": "Team"
   },
@@ -105,6 +106,109 @@
   "common": {
     "language": "Language",
     "en": "English",
-    "hi": "हिन्दी"
+    "hi": "हिन्दी",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "plants": {
+    "title": "Plants",
+    "subtitle": "Your plant catalogue.",
+    "new": "New plant",
+    "categories": "Categories",
+    "empty": "No plants yet. Add your first plant.",
+    "uncategorized": "Uncategorized",
+    "active": "Active",
+    "inactive": "Inactive",
+    "makeActive": "Activate",
+    "makeInactive": "Deactivate",
+    "viewPublic": "Public page",
+    "printLabel": "QR label",
+    "back": "Back to plants",
+    "save": "Save changes",
+    "saving": "Saving…",
+    "saved": "Saved.",
+    "error": "Something went wrong.",
+    "createTitle": "New plant",
+    "editTitle": "Edit plant",
+    "create": "Create plant",
+    "creating": "Creating…",
+    "details": "Details",
+    "fields": {
+      "commonNameEn": "Common name (English)",
+      "commonNameHi": "Common name (Hindi)",
+      "scientificName": "Scientific name",
+      "localName": "Local name",
+      "category": "Category",
+      "variety": "Variety",
+      "unit": "Unit",
+      "descriptionEn": "Description (English)",
+      "descriptionHi": "Description (Hindi)",
+      "careEn": "Care (English)",
+      "careHi": "Care (Hindi)",
+      "sunlight": "Sunlight",
+      "water": "Water",
+      "placement": "Placement",
+      "none": "—"
+    },
+    "sizes": {
+      "title": "Sizes",
+      "subtitle": "Each size is a height (in feet) and/or a bag size.",
+      "height": "Height (ft)",
+      "bag": "Bag size",
+      "label": "Label",
+      "add": "Add size",
+      "adding": "Adding…",
+      "empty": "No sizes yet.",
+      "remove": "Remove"
+    },
+    "images": {
+      "title": "Photos",
+      "add": "Upload photo",
+      "uploading": "Uploading…",
+      "empty": "No photos yet.",
+      "primary": "Primary",
+      "makePrimary": "Make primary",
+      "remove": "Remove",
+      "hint": "JPG or PNG, up to 5 MB."
+    },
+    "cats": {
+      "title": "Categories",
+      "subtitle": "Group plants by type (e.g. Palms, Indoor).",
+      "nameEn": "Name (English)",
+      "nameHi": "Name (Hindi)",
+      "empty": "No categories yet.",
+      "remove": "Remove",
+      "create": "Add category",
+      "creating": "Adding…"
+    },
+    "qr": {
+      "title": "QR label",
+      "scanHint": "Scan for care & plant info",
+      "print": "Print label"
+    }
+  },
+  "plantAttrs": {
+    "sunlight": {
+      "full_sun": "Full sun",
+      "partial_shade": "Partial shade",
+      "full_shade": "Full shade"
+    },
+    "water": { "low": "Low", "medium": "Medium", "high": "High" },
+    "placement": {
+      "indoor": "Indoor",
+      "outdoor": "Outdoor",
+      "both": "Indoor / Outdoor"
+    }
+  },
+  "publicPlant": {
+    "care": "Care",
+    "sunlight": "Sunlight",
+    "water": "Water",
+    "placement": "Placement",
+    "sizes": "Available sizes",
+    "enquire": "Enquire on WhatsApp",
+    "enquiryMessage": "Hi, I'd like to know more about {plant} at {nursery}.",
+    "notFound": "This plant page could not be found.",
+    "poweredBy": "Powered by Plantory"
   }
 }

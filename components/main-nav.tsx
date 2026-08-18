@@ -3,7 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { LayoutDashboard, Settings, Users, type LucideIcon } from "lucide-react";
+import {
+  LayoutDashboard,
+  Leaf,
+  Settings,
+  Users,
+  type LucideIcon,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type NavItem = { href: string; label: string; icon: LucideIcon };
@@ -20,6 +26,7 @@ export function MainNav({
 
   const items: NavItem[] = [
     { href: "/dashboard", label: t("dashboard"), icon: LayoutDashboard },
+    { href: "/plants", label: t("plants"), icon: Leaf },
     ...(isAdmin
       ? [
           { href: "/settings", label: t("settings"), icon: Settings },
