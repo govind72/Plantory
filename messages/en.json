@@ -1,0 +1,30 @@
+{
+  "app": {
+    "name": "Plantory",
+    "tagline": "Smart management for modern nurseries."
+  },
+  "auth": {
+    "loginTitle": "Sign in",
+    "loginSubtitle": "Sign in to continue to {nursery}.",
+    "email": "Email",
+    "password": "Password",
+    "signIn": "Sign in",
+    "signingIn": "Signing in…",
+    "invalidCredentials": "Invalid email or password.",
+    "inactiveAccount": "Your account is inactive. Contact your nursery owner.",
+    "signOut": "Sign out"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome, {name}",
+    "role": "Role",
+    "outlet": "Outlet",
+    "comingSoon": "Your dashboard is coming soon."
+  },
+  "roles": {
+    "owner": "Owner",
+    "admin": "Admin",
+    "outlet_manager": "Outlet Manager",
+    "staff": "Staff"
+  }
+}

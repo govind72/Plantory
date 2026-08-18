@@ -1,0 +1,30 @@
+{
+  "app": {
+    "name": "Plantory",
+    "tagline": "आधुनिक नर्सरियों के लिए स्मार्ट प्रबंधन।"
+  },
+  "auth": {
+    "loginTitle": "साइन इन करें",
+    "loginSubtitle": "{nursery} में जारी रखने के लिए साइन इन करें।",
+    "email": "ईमेल",
+    "password": "पासवर्ड",
+    "signIn": "साइन इन करें",
+    "signingIn": "साइन इन हो रहा है…",
+    "invalidCredentials": "अमान्य ईमेल या पासवर्ड।",
+    "inactiveAccount": "आपका खाता निष्क्रिय है। कृपया नर्सरी मालिक से संपर्क करें।",
+    "signOut": "साइन आउट"
+  },
+  "dashboard": {
+    "title": "डैशबोर्ड",
+    "welcome": "स्वागत है, {name}",
+    "role": "भूमिका",
+    "outlet": "आउटलेट",
+    "comingSoon": "आपका डैशबोर्ड जल्द ही आ रहा है।"
+  },
+  "roles": {
+    "owner": "मालिक",
+    "admin": "एडमिन",
+    "outlet_manager": "आउटलेट प्रबंधक",
+    "staff": "स्टाफ"
+  }
+}
