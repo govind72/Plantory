@@ -31,6 +31,7 @@
   "nav": {
     "dashboard": "Dashboard",
     "plants": "Plants",
+    "inventory": "Inventory",
     "purchases": "Purchases",
     "suppliers": "Suppliers",
     "settings": "Settings",
@@ -297,5 +298,85 @@
     },
     "finalizedNote": "Finalized — landed costs and stock batches were created.",
     "preview": "Landed cost preview (updates on finalize)"
+  },
+  "inventory": {
+    "title": "Inventory",
+    "subtitle": "Stock on hand by outlet.",
+    "outlet": "Outlet",
+    "empty": "No stock at this outlet yet.",
+    "plant": "Plant",
+    "size": "Size",
+    "qty": "Qty",
+    "value": "Value",
+    "totalValue": "Inventory value",
+    "noOutlets": "You have no outlets assigned.",
+    "actions": {
+      "transfer": "Transfer",
+      "recordLoss": "Record loss",
+      "movements": "Movements"
+    },
+    "movements": {
+      "title": "Stock movements",
+      "empty": "No movements yet.",
+      "type": "Type",
+      "qty": "Qty",
+      "cost": "Unit cost",
+      "when": "When",
+      "ref": "Reference",
+      "back": "Back to inventory"
+    },
+    "transfer": {
+      "title": "Transfer stock",
+      "from": "From outlet",
+      "to": "To outlet",
+      "note": "Note",
+      "plant": "Plant",
+      "size": "Size",
+      "qty": "Qty",
+      "selectPlant": "Select plant",
+      "selectSize": "Select size",
+      "addItem": "Add item",
+      "items": "Items to transfer",
+      "empty": "No items added yet.",
+      "execute": "Execute transfer",
+      "executing": "Transferring…",
+      "error": "Transfer failed. Check available stock.",
+      "sameOutlet": "Choose two different outlets.",
+      "remove": "Remove",
+      "back": "Back to inventory"
+    },
+    "loss": {
+      "title": "Record loss",
+      "outlet": "Outlet",
+      "plant": "Plant",
+      "size": "Size",
+      "qty": "Qty",
+      "reason": "Reason",
+      "note": "Note",
+      "selectPlant": "Select plant",
+      "selectSize": "Select size",
+      "record": "Record loss",
+      "recording": "Recording…",
+      "error": "Could not record loss. Check available stock.",
+      "back": "Back to inventory"
+    }
+  },
+  "movementTypes": {
+    "purchase": "Purchase",
+    "sale": "Sale",
+    "transfer_out": "Transfer out",
+    "transfer_in": "Transfer in",
+    "mortality": "Mortality",
+    "damage": "Damage",
+    "adjustment": "Adjustment",
+    "return_in": "Return in"
+  },
+  "lossReasons": {
+    "died": "Plant died",
+    "damage": "Damage",
+    "pest_disease": "Pest / disease",
+    "transport_damage": "Transport damage",
+    "unknown": "Unknown",
+    "other": "Other"
   }
 }

@@ -2142,9 +2142,29 @@ export type Database = {
       is_member_of_outlet: { Args: { target_outlet: string }; Returns: boolean }
       is_org_admin: { Args: never; Returns: boolean }
       is_owner: { Args: never; Returns: boolean }
+      record_loss: {
+        Args: {
+          p_note?: string
+          p_outlet: string
+          p_plant: string
+          p_qty: number
+          p_reason: Database["public"]["Enums"]["loss_reason"]
+          p_size: string
+        }
+        Returns: string
+      }
       set_my_language: {
         Args: { p_lang: Database["public"]["Enums"]["app_language"] }
         Returns: undefined
+      }
+      transfer_stock: {
+        Args: {
+          p_from_outlet: string
+          p_items: Json
+          p_note?: string
+          p_to_outlet: string
+        }
+        Returns: string
       }
     }
     Enums: {

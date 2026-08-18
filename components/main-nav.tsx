@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import {
   LayoutDashboard,
   Leaf,
+  Warehouse,
   Truck,
   Building2,
   Settings,
@@ -31,6 +32,7 @@ export function MainNav({
   const items: NavItem[] = [
     { href: "/dashboard", label: t("dashboard"), icon: LayoutDashboard },
     { href: "/plants", label: t("plants"), icon: Leaf },
+    { href: "/inventory", label: t("inventory"), icon: Warehouse },
     ...(isManager
       ? [
           { href: "/purchases", label: t("purchases"), icon: Truck },
